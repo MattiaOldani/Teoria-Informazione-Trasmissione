@@ -4,3 +4,6 @@ foto/
 
 # repository esterno
 appunti/
+
+# spell check
+.vscode/
