@@ -9,3 +9,5 @@
 #pagebreak()
 
 // Appunti
+
+#include "lezioni/lezione_01.typ"
