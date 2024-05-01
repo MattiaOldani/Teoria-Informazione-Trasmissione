@@ -31,7 +31,7 @@
   breakable: true
 )
 
-#import emoji: suit
+#import emoji: square, suit
 
 // Appunti
 
