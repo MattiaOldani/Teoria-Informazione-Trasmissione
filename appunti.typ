@@ -23,3 +23,6 @@
 #pagebreak()
 
 #include "lezioni/lezione_05.typ"
+#pagebreak()
+
+#include "lezioni/lezione_06.typ"
