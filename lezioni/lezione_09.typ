@@ -38,8 +38,6 @@
   breakable: true
 )
 
-#import emoji: square, suit
-
 // Appunti
 
 = Lezione 09
