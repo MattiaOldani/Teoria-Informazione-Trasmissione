@@ -50,10 +50,11 @@ Anche il *canale binario simmetrico* ha due rappresentazioni possibili.
 // Sistemare perché non è bellissimo
 #align(center)[
   #commutative-diagram(
-    node-padding: (80pt, 80pt),
+    node-padding: (120pt, 120pt),
     arr-clearance: 0.5em,
     padding: 1em,
     debug: false,
+
     node((0,0), [$0$]),
     node((0,1), [$0$]),
     node((1,0), [$1$]),
