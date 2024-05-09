@@ -17,8 +17,6 @@
   breakable: true
 )
 
-#import "@preview/commute:0.2.0": node, arr, commutative-diagram
-
 // Appunti
 
 = Lezione 14
