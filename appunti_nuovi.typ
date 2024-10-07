@@ -2,9 +2,7 @@
 
 #import "template.typ": project
 
-#show: project.with(
-    title: "Teoria dell'informazione e della trasmissione"
-)
+#show: project.with(title: "Teoria dell'informazione e della trasmissione")
 
 #pagebreak()
 
@@ -14,3 +12,6 @@
 #pagebreak()
 
 #include "lezioni_nuove/lezione02.typ"
+#pagebreak()
+
+#include "lezioni_nuove/lezione03.typ"
