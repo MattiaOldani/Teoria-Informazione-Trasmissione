@@ -58,7 +58,7 @@ Ora però abbiamo un altro problema: gli UD non sono *stream*. In poche parole, 
 
 Sono ottimi codici eh, però ogni tanto aspetteremo tutta la codifica prima di poterla decodificare. Eh ma non va bene: in una stream non posso permettermi tutto ciò, e inoltre, se la codifica è veramente grande potrei non riuscire a tenerla tutta in memoria.
 
-Potremmo utilizzare i *codici a nuvola*, ovvero codici che hanno un carattere di terminazione per dire quando una parola è finita, e quindi risolvere il problema stream negli UD, ma noi faremo altro.
+Potremmo utilizzare i *codici a virgola*, ovvero codici che hanno un carattere di terminazione per dire quando una parola è finita, e quindi risolvere il problema stream negli UD, ma noi faremo altro.
 
 Restringiamo per l'ultima volta, definendo i *codici istantanei* (_CI_). Questi codici hanno la proprietà che stiamo cercando, ovvero permettono una decodifica stream, quindi non dobbiamo aspettare tutta la codifica prima di passare alla decodifica, ma possiamo farla appena riconosciamo una parola di codice.
 
