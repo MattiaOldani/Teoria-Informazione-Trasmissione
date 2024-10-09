@@ -15,3 +15,6 @@
 #pagebreak()
 
 #include "lezioni_nuove/lezione03.typ"
+#pagebreak()
+
+#include "lezioni_nuove/lezione04.typ"
