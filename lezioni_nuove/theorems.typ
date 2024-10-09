@@ -24,15 +24,17 @@
 #let definition = thmbox(
   "definizione",
   "Definizione",
-  inset: (x: 1.2em, top: 1em),
+  fill: rgb("#d0ffff"),
 ).with(numbering: none)
 
-#let example = thmplain(
+#let example = thmbox(
   "esempio",
   "Esempio",
+  fill: rgb("#fadadd"),
 ).with(numbering: none)
 
 #let proof = thmproof(
   "dimostrazione",
   "Dimostrazione",
+  fill: rgb("#eeffee"),
 ).with(numbering: none)
