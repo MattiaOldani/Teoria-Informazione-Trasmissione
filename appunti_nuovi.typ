@@ -42,3 +42,6 @@
 #pagebreak()
 
 #include "lezioni_nuove/lezione12.typ"
+#pagebreak()
+
+#include "lezioni_nuove/lezione13.typ"
