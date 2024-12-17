@@ -11,3 +11,13 @@
 // Lezione 11
 
 #let canale(sorgente, ricevente, probabilita) = $angle.l sorgente,ricevente,probabilita angle.r$
+
+// Lezione 14
+
+#let GF(n) = {
+  let GFop = math.class(
+    "unary",
+    "GF",
+  )
+  $GFop(#n)$
+}
