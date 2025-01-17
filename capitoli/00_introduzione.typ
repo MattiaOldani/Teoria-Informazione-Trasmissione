@@ -8,6 +8,8 @@
 
 // Capitolo
 
+#set heading(numbering: none)
+
 = Introduzione
 
 Lo schema di riferimento che andremo ad usare durante tutto il corso è il seguente:
