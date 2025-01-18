@@ -19,3 +19,6 @@
 #pagebreak()
 
 #include "capitoli/informazione/01_codici.typ"
+#pagebreak()
+
+#include "capitoli/informazione/02_kraft.typ"
