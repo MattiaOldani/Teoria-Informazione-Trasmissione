@@ -31,3 +31,6 @@
 #pagebreak()
 
 #include "capitoli/informazione/05_codice-huffman.typ"
+#pagebreak()
+
+#include "capitoli/informazione/06_kraft-mcmillan.typ"
