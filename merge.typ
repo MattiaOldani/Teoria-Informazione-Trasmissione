@@ -37,3 +37,10 @@
 #pagebreak()
 
 #include "capitoli/informazione/07_parenti-entropia.typ"
+
+// Teoria della trasmissione
+
+#parte("Teoria della Trasmissione")
+#pagebreak()
+
+#include "capitoli/trasmissione/01_canale.typ"
