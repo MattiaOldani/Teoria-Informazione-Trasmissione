@@ -22,3 +22,6 @@
 #pagebreak()
 
 #include "capitoli/informazione/02_kraft.typ"
+#pagebreak()
+
+#include "capitoli/informazione/03_entropia.typ"
