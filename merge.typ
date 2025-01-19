@@ -34,3 +34,6 @@
 #pagebreak()
 
 #include "capitoli/informazione/06_kraft-mcmillan.typ"
+#pagebreak()
+
+#include "capitoli/informazione/07_parenti-entropia.typ"
