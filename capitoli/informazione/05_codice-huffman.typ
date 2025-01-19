@@ -1,21 +1,24 @@
-#import "alias.typ": *
+// Setup
+
+#import "../alias.typ": *
 
 #import "@local/typst-theorems:1.0.0": *
 #show: thmrules.with(qed-symbol: $square.filled$)
 
+#import emoji: square
 
-= Lezione 07 [19/10]
 
-== Codice di Huffman
+// Capitolo
 
-Il codice di Shannon era un codice interessante, aveva dei buoni bound ma non era il CI ottimale. Inoltre, era impraticabile se la grandezza del blocco cresceva.
+= Codice di Huffman
 
-Vediamo il *codice di Huffman*. Data una sorgente $modello(X,p)$ e dato $d > 1$, l'algoritmo per creare il codice di Huffman per la sorgente esegue i seguenti passi:
-- ordina le probabilità $p_i$ in maniera decrescente;
-- rimuovi i $d$ simboli meno probabili da $X$ e crea una nuova sorgente aggiungendo un nuovo simbolo che abbia come probabilità la somma delle probabilità dei simboli rimossi;
-- se la nuova sorgente ha più di $d$ simboli torna al punto $1$.
+Il codice di Shannon che abbiamo visto nel capitolo dell'entropia era un codice molto interessante, aveva dei buoni bound ma non era il CI ottimale. Inoltre, grazie al primo teorema di Shannon, questo codice risultava impraticabile se la grandezza del blocco cresceva.
 
-Come funziona nella realtà? Vediamolo con un esempio.
+Vediamo il *codice di Huffman*. Data una sorgente $modello(X,p)$ e dato $d > 1$, l'algoritmo per creare il codice di Huffman per la sorgente $X$ esegue i seguenti passi:
+/* magari anche qua un bell'algoritmo */
++ ordina le probabilità $p_i$ in maniera decrescente;
++ rimuovi i $d$ simboli meno probabili da $X$ e crea una nuova sorgente aggiungendo un nuovo simbolo che abbia come probabilità la somma delle probabilità dei simboli rimossi;
++ se la nuova sorgente ha più di $d$ simboli torna al punto $1$.
 
 #example()[
   Data la sorgente $modello(S,p)$ con:
@@ -27,9 +30,7 @@ Come funziona nella realtà? Vediamolo con un esempio.
 
   #v(12pt)
 
-  #figure(
-    image("../assets/07_huffman-compressione.svg", width: 70%),
-  )
+  #figure(image("assets/05_huffman-compressione.svg", width: 80%))
 
   #v(12pt)
 
@@ -37,17 +38,17 @@ Come funziona nella realtà? Vediamolo con un esempio.
 
   #v(12pt)
 
-  #figure(
-    image("../assets/07_huffman-generazione.svg", width: 70%),
-  )
+  #figure(image("assets/05_huffman-generazione.svg", width: 80%))
 
   #v(12pt)
 ]
 
-Questo codice è un codice che a noi piace molto perché rispetta due condizioni per noi fondamentali: minimizza il valore atteso delle lunghezze delle parole di codice e rispetta Kraft. Infatti: $ "CH" = cases(min_(l_1, dots, l_m) sum_(i=1)^m l_i p_i, sum_(i=1)^m d^(-l_i) lt.eq 1) . $
+Questo codice è un codice che a noi piace molto perché rispetta due condizioni per noi fondamentali: minimizza il valore atteso delle lunghezze delle parole di codice e rispetta Kraft. Infatti: $ "CH" = cases(limits(min)_(l_1, dots, l_m) limits(sum)_(i=1)^m l_i p_i, limits(sum)_(i=1)^m d^(-l_i) lt.eq 1) . $
 
 #lemma()[
-  Sia $c$ un codice $d$-ario di Huffman per la sorgente $modello(X',p')$ con $X' = {x_1, dots, x_(m-d+1)}$ e probabilità $p_1 gt.eq dots gt.eq p_(m-d+1)$. Data ora la sorgente $modello(X,p)$ con $X = {x_1, dots, x_m}$ costruita da $X'$ togliendo il simbolo $x_k$ e aggiungendo $d$ simboli $x_(m-d+2), dots, x_m$ con probabilità $p_k gt.eq p_(m-d+2) gt.eq dots gt.eq p_m$ tali che $sum_(i=2)^d p_(m-d+i) = p_k$. Allora $ c(x) = cases(c'(x) & "se" x eq.not x_k, c'(x_k) dot i quad & "se" k in {m-d+2, dots, m} and forall i in D) $ è un codice di Huffman per la sorgente $X$.
+  Sia $c$ un codice $d$-ario di Huffman per la sorgente $modello(X',p')$ con $X' = {x_1, dots, x_(m-d+1)}$ e probabilità $p_1 gt.eq dots gt.eq p_(m-d+1)$. Data ora la sorgente $modello(X,p)$ con $X = {x_1, dots, x_m}$ costruita da $X'$ togliendo il simbolo $x_k$ e aggiungendo $d$ simboli $x_(m-d+2), dots, x_m$ con probabilità $p_k gt.eq p_(m-d+2) gt.eq dots gt.eq p_m$ tali che $ sum_(i=2)^d p_(m-d+i) = p_k . $
+
+  Allora il codice $ c(x_t) = cases(c'(x_t) & "se" t eq.not k, c'(x_k) dot i quad & "se" t in {m-d+2, dots, m} and forall i in D) $ è un codice di Huffman per la sorgente $X$.
 ]
 
 Grazie a questo lemma ora possiamo dimostrare un risultato importante sul codice di Huffman.
@@ -59,21 +60,21 @@ Grazie a questo lemma ora possiamo dimostrare un risultato importante sul codice
 #proof()[
   Dimostriamo per induzione su $m$.
 
-  Il passo base è $m = 2$, quindi abbiamo due simboli $x_1,x_2$ che, indipendentemente dalla probabilità assegnatagli, avranno $0$ e $1$ come codifica, che è minima.
+  Il passo base è $m = 2$, quindi abbiamo due simboli $x_1$ e $x_2$ che, indipendentemente dalla probabilità assegnatagli, avranno $0$ e $1$ come codifica, che è minima.
 
   Assumiamo ora che Huffman sia ottimo per sorgenti di grandezza $m-1$ e dimostriamo che sia ottimo per sorgenti di grandezza $m$.
 
   Fissata $modello(X,p)$ sorgente di $m$ simboli, siano $u,v in X$ i due simboli con le probabilità minime. Costruiamo la sorgente $modello(X',p')$ dove $u,v$ sono sostituiti da $z$ tale che $ p'(x) = cases(p(x) & "se" x eq.not z, p(u) + p(v) quad & "se" x = z) . $
 
-  Ho $m-1$ simboli, quindi per ipotesi induttiva $c'$ è un codice di Huffman ottimo. Per il lemma precedente, anche il codice $c$ è di Huffman ed è tale che $ c(x) = cases(c'(x) & "se" x eq.not u and x eq.not v, c'(x) dot 0 & "se" x = u, c'(x) dot 1 quad & "se" x = v) . $
+  Ho $m-1$ simboli, quindi per ipotesi induttiva $c'$ è un codice di Huffman ottimo. Per il lemma precedente, anche il codice $c$ è di Huffman ed è tale che $ c(x) = cases(c'(x) & "se" x eq.not u and x eq.not v, c'(u) dot 0 & "se" x = u, c'(v) dot 1 quad & "se" x = v) . $
 
   Dimostriamo che il codice $c$ è ottimo.
-  
+
   Calcoliamo il valore atteso delle lunghezze delle parole del codice $c$ come $ EE[l_c] &= sum_(x in X) l_c (x) p(x) = \ &= sum_(x in X') l_(c') (x) p'(x) - l_(c') (z) p'(z) + l_c (u) p(u) + l_c (v) p(v) = \ &= EE[l_(c')] - l_(c') (z) p'(z) + (l_(c') (z) + 1) p(u) + (l_(c') (z) + 1) p(v) = \ &= EE[l_(c')] - l_(c') (z) p'(z) + (l_(c') (z) + 1) (p(u) + p(v)) = \ &= EE[l_(c')] - l_(c') (z) p'(z) + (l_(c') (z) + 1) p'(z) = \ &= EE[l_(c')] - l_(c') (z) p(z) + l_(c') (z) p'(z) + p'(z) = \ & = EE[l_(c')] + p'(z) . $
 
   Per dimostrare l'ottimalità di $c$ consideriamo un altro codice $c_2$ per la sorgente $modello(X,p)$ e verifichiamo che $EE[l_c] lt.eq EE[l_(c_2)]$. Sia $c_2$ istantaneo per $modello(X,p)$ e siano $r,s in X$ tali che $l_(c_2) (r)$ e $l_(c_2) (s)$ sono massime. Senza perdita di generalità assumiamo che $r,s$ siano fratelli nell'albero di codifica di $c_2$. Infatti:
   - se sono fratelli GG, godo;
-  - se non sono fratelli ma uno tra $r$ e $s$ ha un fratello (sia $f$ fratello di $s$ ad esempio) andiamo a scegliere $s$ e $f$ al posto di $s$ e $r$;
+  - se non sono fratelli ma uno tra $r$ e $s$ ha un fratello (_sia f fratello di s ad esempio_) andiamo a scegliere $s$ e $f$ al posto di $s$ e $r$;
   - se non sono fratelli perché sono su due livelli diversi (_a distanza uno_) possiamo sostituire la codifica di quello più basso con quella del padre e ritornare in una delle due situazioni precedenti.
 
   Definiamo il codice $overline(c)_2$ tale che $ overline(c)_2 = cases(c_2 (x) & "se" x in.not {u,v,r,s}, c_2 (u) & "se" x = r, c_2 (r) & "se" x = u, c_2 (v) & "se" x = s, c_2 (s) quad & "se" x = v) . $
@@ -82,7 +83,9 @@ Grazie a questo lemma ora possiamo dimostrare un risultato importante sul codice
 
   Analizziamo $EE[l_(overline(c)_2)] - EE[l_(c_2)]$ per dimostrare che il primo è minore o uguale del secondo. Notiamo prima di tutto che i simboli $x in.not {u,v,r,s}$ non compaiono nel conto successivo: questo perché nei due codici hanno lo stesso contributo in probabilità e lunghezza, quindi consideriamo solo i simboli appena citati visto che vengono scambiati.
 
-  $ EE[l_(overline(c)_2)] - EE[l_(c_2)] &= p(r) l_(c_2) (u) + p(u) l_(c_2) (r) + p(s) l_(c_2) (v) + p(v) l_(c_2) (s) \ & space - p(r) l_(c_2) (r) - p(u) l_(c_2) (u) - p(s) l_(c_2) (s) - p(v) l_(c_2) (v) = \ &= p(r) (l_(c_2) (u) - l_(c_2) (r)) + p(u) (l_(c_2) (r) - l_(c_2) (u)) + \ & space + p(s) (l_(c_2) (v) - l_(c_2) (s)) + p(v) (l_(c_2) (s) - l_(c_2) (v)) = \ & = (p(r) - p(u))(l_c_2 (u) - l_c_2 (r)) + (p(s) - p(v))(l_c_2 (v) - l_c_2 (s)) . $
+  $
+    EE[l_(overline(c)_2)] - EE[l_(c_2)] &= p(r) l_(c_2) (u) + p(u) l_(c_2) (r) + p(s) l_(c_2) (v) + p(v) l_(c_2) (s) \ & space - p(r) l_(c_2) (r) - p(u) l_(c_2) (u) - p(s) l_(c_2) (s) - p(v) l_(c_2) (v) = \ &= p(r) (l_(c_2) (u) - l_(c_2) (r)) + p(u) (l_(c_2) (r) - l_(c_2) (u)) + \ & space + p(s) (l_(c_2) (v) - l_(c_2) (s)) + p(v) (l_(c_2) (s) - l_(c_2) (v)) = \ & = (p(r) - p(u))(l_c_2 (u) - l_c_2 (r)) + (p(s) - p(v))(l_c_2 (v) - l_c_2 (s)) .
+  $
 
   Ma noi sappiamo che:
   - $p(r) - p(u) gt.eq 0$ dato che $u$ è un simbolo a probabilità minima;
@@ -100,3 +103,13 @@ Grazie a questo lemma ora possiamo dimostrare un risultato importante sul codice
 
   Ma allora $ EE[l_c] lt.eq EE[l_(c_2)] . qedhere $
 ]
+
+Bisogna fare un piccolo appunto sull'algoritmo che genera il codice di Huffman: esso genera il codice ottimo se e solo se il numero di simboli è corretto. Quale è il numero corretto? Mo ci arrivo, calma.
+
+Supponiamo di partire da $m$ simboli, ad ogni iterazione rimuoviamo $d - 1$ simboli: $ m arrow.long m - (d - 1) arrow.long m - 2 (d - 1) arrow.long dots arrow.long m - t (d - 1). $ Chiamiamo $square.black = m - t (d - 1)$. Siamo arrivati ad avere $square.black$ elementi, con $square.black lt.eq d$.
+
+Noi vorremmo avere esattamente $d$ elementi per avere un albero ben bilanciato e senza perdita di rami, quindi aggiungiamo a $square.black$ un numero $k$ di *simboli dummy* tali per cui $square.black + k = d$. I simboli dummy sono dei simboli particolari che hanno probabilità nulla e che usiamo solo come riempimento. Supponiamo di eseguire ancora un passo dell'algoritmo, quindi da $square.black + k$ andiamo a togliere $d - 1$ elementi, lasciando la sorgente con un solo elemento.
+
+Cosa abbiamo ottenuto? Ricordando che $square.black = m - t (d - 1)$, abbiamo fatto vedere che: $ square.black + k - (d - 1) &= 1 \ m - t (d - 1) + k - (d - 1) &= 1 \ m + k - (t + 1)(d - 1) &= 1. $
+
+In poche parole, il numero $m$ di simboli sorgente, aggiunto al numero $k$ di simboli _"fantoccio"_, è congruo ad $1$ modulo $(d - 1)$, ovvero $ m + k equiv 1 space mod space d - 1 . $

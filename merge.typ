@@ -28,3 +28,6 @@
 #pagebreak()
 
 #include "capitoli/informazione/04_primo-teorema-shannon.typ"
+#pagebreak()
+
+#include "capitoli/informazione/05_codice-huffman.typ"
