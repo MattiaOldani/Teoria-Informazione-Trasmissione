@@ -13,7 +13,7 @@
   set page(numbering: "1")
 
   align(center + horizon)[
-    #block(text(weight: 700, 2.05em, title))
+    #block(text(weight: 700, 2em, title))
   ]
 
   pagebreak()

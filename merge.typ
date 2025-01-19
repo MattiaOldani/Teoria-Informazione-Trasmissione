@@ -2,7 +2,7 @@
 
 #import "template.typ": *
 
-#show: project.with(title: "Teoria dell'informazione e della trasmissione")
+#show: project.with(title: "Teoria dell'Informazione e della Trasmissione")
 
 #pagebreak()
 
@@ -25,3 +25,6 @@
 #pagebreak()
 
 #include "capitoli/informazione/03_entropia.typ"
+#pagebreak()
+
+#include "capitoli/informazione/04_primo-teorema-shannon.typ"
