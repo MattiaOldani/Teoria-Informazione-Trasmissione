@@ -54,3 +54,6 @@
 #pagebreak()
 
 #include "capitoli/codici/01_codici_semplici.typ"
+#pagebreak()
+
+#include "capitoli/codici/02_codici_ripetizione.typ"
