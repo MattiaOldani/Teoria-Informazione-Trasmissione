@@ -60,3 +60,6 @@
 #pagebreak()
 
 #include "capitoli/codici/03_codice-hamming.typ"
+#pagebreak()
+
+#include "capitoli/codici/04_codici-lineari.typ"
