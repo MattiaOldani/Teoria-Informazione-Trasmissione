@@ -26,3 +26,27 @@
 }
 
 #let coderate = $italic("CR")$
+
+#let grado(p) = {
+  let gradoop = math.class(
+    "unary",
+    "gr",
+  )
+  $gradoop[#p]$
+}
+
+#let peso(p) = {
+  let gradoop = math.class(
+    "unary",
+    $omega$,
+  )
+  $gradoop(#p)$
+}
+
+#let hamming(p) = {
+  let gradoop = math.class(
+    "unary",
+    "d",
+  )
+  $gradoop(#p)$
+}

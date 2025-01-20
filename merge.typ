@@ -63,3 +63,6 @@
 #pagebreak()
 
 #include "capitoli/codici/04_codici-lineari.typ"
+#pagebreak()
+
+#include "capitoli/codici/05_codici-ciclici.typ"
