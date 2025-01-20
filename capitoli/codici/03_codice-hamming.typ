@@ -73,3 +73,25 @@ Useremo la distanza di Hamming per capire quanti errori un codice può rilevare 
 Possiamo vedere queste due quantità come due bolle su un asse cartesiano: su di esso poniamo le due parole di codice $x_0,x_1$ e le due bolle definite dalle due quantità precedenti. Non ho voglia di disegnare, mi dispiace tanto.
 
 Non posso andare oltre $x_0$ (_partendo dall'altra parola_) perché $x_0$ è una parola di codice.
+
+== Rilevazione e correzione errori
+
+La distanza di Hamming è necessaria nella definizione del numero di errori che possono essere rilevati e corretti da un codice.
+
+Un codice $P$ *rileva* $z$ errori se $ forall x in P quad forall x' in M_n slash P arrow.long.double 0 < hamming(x\,x') lt.eq z . $
+
+Un codice $P$ *corregge* $t$ errori se $ forall x,y in P bar.v x eq.not y quad and quad forall x' in M_n slash P arrow.long.double hamming(x\,x') lt.eq t and hamming(x'\,y) > t . $
+
+#theorem()[
+  Condizione necessaria e sufficiente affinché il codice $P$ rilevi $z$ errori è che $ hamming(P) gt.eq z + 1 . $
+]
+
+#theorem()[
+  Condizione necessaria e sufficiente affinché il codice $P$ corregga $t$ errori è che $ hamming(P) gt.eq 2t + 1 . $
+]
+
+In questi due teoremi, $hamming(P)$ indica la *distanza di Hamming minima* tra due parole del codice.
+
+Come facciamo a sapere il valore $hamming(P)$?
+
+Non so come, ma il valore $peso(P)$, che indica il minimo numero di $1$ presenti nelle parole di codice, è in realtà uguale a $hamming(P)$, quindi si gode.
