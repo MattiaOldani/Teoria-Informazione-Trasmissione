@@ -57,3 +57,6 @@
 #pagebreak()
 
 #include "capitoli/codici/02_codici_ripetizione.typ"
+#pagebreak()
+
+#include "capitoli/codici/03_codice_hamming.typ"
