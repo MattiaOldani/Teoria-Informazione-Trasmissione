@@ -1,16 +1,18 @@
-#import "alias.typ": *
+// Setup
+
+#import "../alias.typ": *
 
 #import "@local/typst-theorems:1.0.0": *
 #show: thmrules.with(qed-symbol: $square.filled$)
 
 
-= Lezione 13 [22/11]
+// Capitolo
 
-Sappiamo che $C = max_p(x) I(XX,YY)$ ma risolverlo non è banale, questo perché non abbiamo un procedimento algoritmico e siamo obbligati a giocare con l'informazione mutua.
+= Secondo teorema di Shannon
 
-Il canale, così come l'abbiamo definito ora, non ci va bene: come nella parte di codifica, definiremo una sorta di estensione del canale per poter poi _"spalmare"_ l'errore quando scegliamo una estensione molto grande.
+Il canale che abbiamo ora non ci va molto bene: come nella parte di codifica, definiremo una sorta di estensione del canale per poter poi _"spalmare"_ l'errore quando l'estensione diventa molto grande.
 
-Definiamo quindi l'*estensione* $n$-esima del canale la tupla $ C_n = canale(X^n, Y^n, p(y^n bar.v x^n)) $ tale che $p(y^n bar.v x^n) = product_(i=1)^n p(y_i bar.v x_i)$ per indipendenza.
+Definiamo quindi l'*estensione* $n$-esima del canale come la tupla $ C_n = canale(X^n, Y^n, p(y^n bar.v x^n)) $ tale che $ p(y^n bar.v x^n) = product_(i=1)^n p(y_i bar.v x_i) $ per indipendenza.
 
 Un *codice canale* per il canale $C_n$ è di tipo $(M,n)$ se:
 - $M$ è il massimo numero di messaggi che voglio codificare/spedire sul canale, ovvero è l'insieme di messaggi ${1, dots, M}$;
@@ -18,14 +20,14 @@ Un *codice canale* per il canale $C_n$ è di tipo $(M,n)$ se:
 - $x^n$ è la funzione di codifica tale che $x^n : {1, dots, M} arrow.long X^n$;
 - $g$ è la funzione di decodifica tale che $y^n : YY^n arrow.long {1, dots, M}$.
 
-Manca ancora qualcosa, ma per sapere cosa vediamo cosa stiamo facendo ora: $ M arrow.long^(x^n) X^n arrow.long^"send" (italic("canale con rumore")) arrow.long^("send") Y^n . $
+Manca ancora qualcosa, ma per sapere cosa vediamo cosa stiamo facendo ora: $ M arrow.long^(x^n) X^n arrow.long^"send" ("canale con rumore") arrow.long^("send") Y^n . $
 
-Siamo in $Y^n$, abbiamo a disposizione $g$ funzione di decodifica, che però potrebbe fare errori: questo è dato dal fatto che siamo passati in un canale con rumore. Dobbiamo quindi applicare $g$ e indovinare il risultato di questa decodifica.
+Siamo in $Y^n$, abbiamo a disposizione la funzione $g$ di decodifica, che però potrebbe fare errori: questo è dato dal fatto che siamo passati in un canale con rumore. Dobbiamo quindi applicare $g$ e indovinare il risultato di questa decodifica.
 
 Completiamo il nostro codice canale con:
-- $lambda_i$ è definita come $P(g(y^n) eq.not i bar.v XX^n = x^n (i))$, ovvero la probabilità che la funzione $g$ decodifichi $y^n$ in un valore diverso da $i$, che è il nostro messaggio di partenza che è stato codificato da $x^n$;
-- $lambda^((n))$ è definita come $max_(i = 1, dots, n) lambda_i$, ovvero la massima probabilità di errore; quantità comoda come upper bound alle probabilità di errore;
-- $p_e^((n))$ è definita come $1/n sum_(i=1)^n lambda_i$; quantità comoda invece per gestire delle probabilità medie.
+- $lambda_i$, definita come $P(g(y^n) eq.not i bar.v XX^n = x^n (i))$, ovvero la probabilità che la funzione $g$ decodifichi $y^n$ in un valore diverso da $i$, che è il nostro messaggio di partenza che è stato codificato da $x^n$;
+- $lambda^((n))$, definita come $max_(i = 1, dots, n) lambda_i$, ovvero la massima probabilità di errore; quantità comoda come upper bound alle probabilità di errore;
+- $p_e^((n))$, definita come $1/n sum_(i=1)^n lambda_i$; quantità comoda invece per gestire delle probabilità medie.
 
 Vale ovviamente $p_e^((n)) lt.eq lambda^((n))$.
 
@@ -33,7 +35,7 @@ Definiamo il *tasso di trasmissione* di un codice di tipo $(M,n)$ come la quanti
 
 Nel nostro caso specifico, codificando in binario e usando $n$ accessi al canale, il numero di messaggi disponibili è $2^n$, ma allora $ R = (log_2(2^n)) / n = 1 . $ Questo caso è quello _utopico_, ovvero quando il canale è senza rumore. Se quest'ultimo è presente il tasso di trasmissione è ovviamente minore.
 
-Nella realtà viene usato il *tasso di trasmissione raggiungibile*. Un tasso di trasmissione $R$ è *raggiungibile* se esiste una sequenza di codici canale di tipo $(2^(n R), n)$ per $n = 1, 2, dots$ tale che $ lim_(n arrow infinity) lambda^((n)) = 0 . $
+Nella realtà viene usato il *tasso di trasmissione raggiungibile*. Un tasso di trasmissione $R$ è *raggiungibile* se esiste una sequenza di codici canale di tipo $(2^(n R), n) bar.v n = 1, 2, dots$ tale che $ lim_(n arrow infinity) lambda^((n)) = 0 . $
 
 Avendo $R < 1$ il valore di $M$ del codice canale viene minore del caso utopico. Possiamo vedere $R$ come la quantità che ci indica quanto sfoltire il $2^n$ teorico per non avere errori. Ovviamente, prenderemo la parte intera della quantità $2^(n R)$ perché dobbiamo codificare un numero intero di messaggi.
 
@@ -69,7 +71,7 @@ Il significato operativo di quanto detto fin'ora è il seguente: asintoticamente
 
 #theorem()[
   Siano $XX_1, dots, XX_n$ delle variabili casuali i.i.d. e sia $A_epsilon^((n))$ l'insieme tipico ad esse associato. Allora:
-  + possiamo dare un upper bound al numero di elementi dell'insieme tipico, ovvero $ forall n quad abs(A_epsilon^((n))) lt.eq 2^(n (H(XX) + epsilon)) ; $
+  + possiamo dare un upper bound al numero di elementi dell'insieme tipico, ovvero $ forall n in NN quad abs(A_epsilon^((n))) lt.eq 2^(n (H(XX) + epsilon)) ; $
   + possiamo dare un lower bound al numero di elementi dell'insieme tipico, ovvero $ exists n_0 in NN bar.v forall n > n_0 quad abs(A_epsilon^((n))) gt.eq (1 - epsilon) 2^(n (H(XX) - epsilon)) . $
 ]
 
@@ -97,9 +99,7 @@ In poche parole, l'insieme $B_epsilon^((n))$ contiene tutte le coppie di sequenz
 
 Stiamo rispettando sia le distribuzioni marginali sia quella congiunta.
 
-Le due proprietà ci dicono che per $n$ grande quasi tutte le coppie osservabili di sequenze appartengono all'insieme $B_epsilon^((n))$. Inoltre, la probabilità di uscire da questo insieme è bassa e decresce esponenzialmente al crescere di $n$.
-
-Lavorando con l'insieme tipico abbiamo una rappresentazione affidabile e precisa del comportamento delle sequenze originali.
+Le due proprietà ci dicono che per $n$ grande quasi tutte le coppie osservabili di sequenze appartengono all'insieme $B_epsilon^((n))$. Inoltre, la probabilità di uscire da questo insieme è bassa e decresce esponenzialmente al crescere di $n$. Lavorando con l'insieme tipico abbiamo una rappresentazione affidabile e precisa del comportamento delle sequenze originali.
 
 Possiamo vedere infine il secondo teorema di Shannon, madonna.
 
@@ -109,5 +109,3 @@ Possiamo vedere infine il secondo teorema di Shannon, madonna.
 
 In altre parole, è possibile scegliere un codice che si avvina al massimo della capacità del canale tramite $R$, ovvero avvicinando il codice al massimo valore che $R$ può assumere. Inoltre, così facendo, almeno teoricamente, si _“spalma”_ l’errore sull'informazione trasmessa (_che è però massima_), perciò all’aumentare di $n$ si riduce al minimo l’errore trasmesso. Ricordiamo anche che, all’aumentare di $n$, le _“sfere”_ dell’insieme tipico tendono a non toccarsi permettendo di
 decodificare senza sovrapposizioni.
-
-Da rileggere sicuramente.

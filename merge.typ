@@ -44,3 +44,6 @@
 #pagebreak()
 
 #include "capitoli/trasmissione/01_canale.typ"
+#pagebreak()
+
+#include "capitoli/trasmissione/02_secondo-teorema-shannon.typ"
