@@ -53,10 +53,10 @@
 #parte("Codici")
 #pagebreak()
 
-#include "capitoli/codici/01_codici_semplici.typ"
+#include "capitoli/codici/01_codici-semplici.typ"
 #pagebreak()
 
-#include "capitoli/codici/02_codici_ripetizione.typ"
+#include "capitoli/codici/02_codici-ripetizione.typ"
 #pagebreak()
 
-#include "capitoli/codici/03_codice_hamming.typ"
+#include "capitoli/codici/03_codice-hamming.typ"
