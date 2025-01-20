@@ -47,3 +47,10 @@
 #pagebreak()
 
 #include "capitoli/trasmissione/02_secondo-teorema-shannon.typ"
+
+// Codici
+
+#parte("Codici")
+#pagebreak()
+
+#include "capitoli/codici/01_codici_semplici.typ"
