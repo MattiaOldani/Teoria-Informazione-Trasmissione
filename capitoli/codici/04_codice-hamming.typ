@@ -22,7 +22,7 @@ Nel $1985$ un ingegnere ha proposto una spiegazione molto semplice di quello che
 
 #v(12pt)
 
-#figure(image("assets/mc-eliece.svg", width: 50%))
+#figure(image("assets/09_mc-eliece.svg", width: 50%))
 
 #v(12pt)
 

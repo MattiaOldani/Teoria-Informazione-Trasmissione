@@ -53,16 +53,19 @@
 #parte("Codici")
 #pagebreak()
 
-#include "capitoli/codici/01_codici-semplici.typ"
+#include "capitoli/codici/01_introduzione-matematica.typ"
 #pagebreak()
 
-#include "capitoli/codici/02_codici-ripetizione.typ"
+#include "capitoli/codici/02_codici-semplici.typ"
 #pagebreak()
 
-#include "capitoli/codici/03_codice-hamming.typ"
+#include "capitoli/codici/03_codici-ripetizione.typ"
 #pagebreak()
 
-#include "capitoli/codici/04_codici-lineari.typ"
+#include "capitoli/codici/04_codice-hamming.typ"
 #pagebreak()
 
-#include "capitoli/codici/05_codici-ciclici.typ"
+#include "capitoli/codici/05_codici-lineari.typ"
+#pagebreak()
+
+#include "capitoli/codici/06_codici-ciclici.typ"

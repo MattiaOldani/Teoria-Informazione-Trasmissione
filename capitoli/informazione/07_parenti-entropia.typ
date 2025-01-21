@@ -52,7 +52,7 @@ Un modo forse più comodo di scrivere l'informazione mutua è $ I(XX,YY) = H(XX)
 
 #v(12pt)
 
-#figure(image("assets/09_venn.svg", width: 70%))
+#figure(image("assets/07_venn.svg", width: 70%))
 
 #v(12pt)
 

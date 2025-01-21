@@ -30,8 +30,6 @@ Questa costruzione dei codici di Shannon-Fano è molto bella:
 
 Purtroppo, i codici di Shannon-Fano *non sono ottimali*.
 
-SISTEMA DA QUA
-
 #example()[
   Sia $X$ una sorgente di due simboli $x_1$ e $x_2$ con probabilità $ p_1 = 0.1 quad bar.v quad p_2 = 0.9 . $ Il codice di Shannon risultante ha lunghezze $ l_1 = ceil(log_2(1/0.1)) = 4 quad bar.v quad l_2 = ceil(log_2(1/0.9)) = 1 . $ Questo sicuramente non è ottimale: basta dare $0$ a $x_0$ e $1$ a $x_1$ per avere un codice ottimo.
 ]
@@ -54,11 +52,13 @@ Vogliamo cambiare la base dell'entropia, come facciamo? Ricordiamo che $ log_d (
   Ce lo potevamo aspettare? *SI*: nel caso di evento certo e evento impossibile io so esattamente quello che mi aspetta, quindi l'informazione è nulla, mentre in caso di totale incertezza l'informazione che posso aspettarmi è massima.
 ]
 
+Come mai possiamo affermare quanto detto nell'ultimo esempio? Quando ho una serie di eventi, se gli eventi mi danno *totale incertezza* io non saprò mai quello che potrebbe succedere, quindi l'informazione che mi dà l'osservazione dell'evento è massima. Al contrario, se ho eventi certi o impossibile l'informazione è nulla, visto che so già l'esito dell'osservazione.
+
 Vediamo ora due bound del logaritmo che ci permetteranno di dimostrare tanti bei teoremi.
 
 #v(12pt)
 
-#figure(image("assets/03_disuguaglianza.svg", width: 85%))
+#figure(image("assets/03_disuguaglianza.svg", width: 70%))
 
 #v(12pt)
 
@@ -118,7 +118,7 @@ Vediamo finalmente il bound che ci dà l'entropia sulla compattezza del codice.
 
 Questo bound ci dice che un codice non può comunicare meno di quanto vale l'entropia di quella sorgente, indipendentemente dal codice scelto.
 
-Vediamo infine una proprietà del codice di Shannon, ora che abbiamo conosciuto abbastanza bene il concetto di entropia e tutti i suoi bound.
+Abbiamo quasi finito: vediamo una proprietà del codice di Shannon, ora che abbiamo conosciuto abbastanza bene il concetto di entropia e tutti i suoi bound.
 
 #theorem()[
   Per ogni sorgente $modello(X,p)$ con:
@@ -134,3 +134,15 @@ Vediamo infine una proprietà del codice di Shannon, ora che abbiamo conosciuto 
 ]
 
 Ho trovato quindi un bound superiore alle lunghezze delle parole di codice di un codice di Shannon. Se uniamo questo bound a quelli di questo capitolo otteniamo $ H_d (XX) lt.eq EE[l_c] lt.eq H_d (XX) + 1 . $
+
+Per finire, cosa succede se per la sorgente $modello(X,p)$ non ho la distribuzione $p$ ma ho una distribuzione $q$ di una variabile casuale $YY$ che ha campionato $XX$?
+
+#theorem()[
+  Data una sorgente $modello(X,p)$, se $c : X arrow.long D^+$ è un codice di Shannon avente lunghezze $ l_c (x) = ceil(log_d 1/q(x)) $ dove $q$ è una distribuzione di probabilità su $X$ campionata con $YY$, allora $ EE[l_c] < H_d (XX) +1 + enrel(XX,YY) . $
+]
+
+#proof()[
+  Dimostrazione abbastanza banale: $ EE[l_c] &= sum_(x in X) p(x) ceil(log_d (1 / q(x))) \ &< sum_(x in X) p(x) (log_d (1 / q(x)) + 1) = \ &= sum_(x in X) p(x) log_d (1/q(x)) + sum_(x in X) p(x) = \ &= sum_(x in X) p(x) log_d (p(x) / (p(x) q(x))) + 1 = \ &= sum_(x in X) p(x) log_d (p(x) / q(x)) + sum_(x in X) p(x) log_d (1/p(x)) + 1 = \ &= H_d (XX) + 1 + enrel(XX,YY) . $
+
+  Odio il quadratino.
+]

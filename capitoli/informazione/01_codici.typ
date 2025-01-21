@@ -2,6 +2,18 @@
 
 #import "../alias.typ": *
 
+#import "@preview/lovelace:0.3.0": pseudocode-list
+
+#let settings = (
+  line-numbering: "1:",
+  stroke: 1pt + blue,
+  hooks: 0.2em,
+  booktabs: true,
+  booktabs-stroke: 2pt + blue,
+)
+
+#let pseudocode-list = pseudocode-list.with(..settings)
+
 #import "@local/typst-theorems:1.0.0": *
 #show: thmrules.with(qed-symbol: $square.filled$)
 
@@ -41,6 +53,26 @@ Purtroppo, la non singolarità *non* si trasmette nell'estensione del codice.
 ]
 
 Restringiamo l'insieme dei codici solo a quelli UD. Per dimostrare che un codice è UD esiste l'algoritmo di *Sardinas-Patterson*, che lavora in tempo $ O(m L) quad bar.v quad m = abs(X) and L = sum_(x in X) l_c (x) . $
+
+Come funziona l'algoritmo di Sardinas-Patterson?
+
+#align(center)[
+  #pseudocode-list(title: [Sardinas-Patterson])[
+    - *input*
+      - insieme $S_1$ contenente le parole del codice $c$
+    + for $i = 1, 2, dots$
+      + Costruiamo l'insieme $S_(i+1)$
+        + for $x in S_1$
+          + Se $x y in S_i$ allora $y in S_(i+1)$
+        + for $x in S_i$
+          + Se $x y in S_1$ allora $y in S_(i+1)$
+      + Casi di terminazione:
+        + Se $S_(i+1) = emptyset.rev$ allora $c$ è UD
+        + Se $S_(i+1)$ è uguale ad almeno un insieme $S_j bar.v j < i+1$ allora $c$ è UD
+        + Se $S_(i+1) sect S_1 eq.not emptyset.rev$ allora $c$ non è UD
+      + Se siamo arrivati fin qua ricominciamo il ciclo for con un nuovo valore di $i$
+  ]
+]
 
 Con gli UD abbiamo un altro piccolo problema: non sono *stream*. In poche parole, un codice UD non ci garantisce di decodificare istantaneamente una parola di codice in un carattere di $X$ quando mi arrivano un po' di bit, ma dovrei prima ricevere tutta la stringa e poi decodificare. Sono ottimi codici eh, però ogni tanto aspetteremo tutta la codifica prima di poterla decodificare. Eh, ma non va bene: in una stream non posso permettermi tutto ciò, e inoltre, se la codifica è veramente grande, potrei non riuscire a tenerla tutta in memoria.
 
