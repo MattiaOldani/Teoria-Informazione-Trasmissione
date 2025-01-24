@@ -223,7 +223,7 @@ Sappiamo, per la Chain Rule dell'entropia, che $ H(YY,WW) = H(YY) + H(WW bar.v Y
 
 Notiamo che $H(WW bar.v YY) = 0$ perché se conosco $YY$ posso dire con precisione il valore di $WW$.
 
-Abbiamo tolto un fattore. Calcoliamo ora $H(WW)$ con la formula classica di entropia, calcolando però prima le singole probabilità $p(WW = i)$ come $ p(WW = 1) &= p(XX = 0) p(WW = 1 bar.v XX = 0) + p(XX = 1) p(WW = 1) p(WW = 1 bar.v XX = 1) = \ &= p(XX = 0) alpha + p(XX = 1) alpha = alpha (p(XX = 0) + p(XX = 1)) = alpha \ p(WW = 0) &= 1 - p(WW = 1) = 1 - alpha . $
+Abbiamo tolto un fattore. Calcoliamo ora $H(WW)$ con la formula classica di entropia, calcolando però prima le singole probabilità $p(WW = i)$ come $ p(WW = 1) &= p(XX = 0) p(WW = 1 bar.v XX = 0) + p(XX = 1) p(WW = 1 bar.v XX = 1) = \ &= p(XX = 0) alpha + p(XX = 1) alpha = alpha (p(XX = 0) + p(XX = 1)) = alpha \ p(WW = 0) &= 1 - p(WW = 1) = 1 - alpha . $
 
 Ma allora $ H(WW) = sum_(i=0)^1 p(w_i) log_2(1/p(w_i)) = (1-alpha) log_2(1/(1-alpha)) + alpha log_2(1/alpha) = H(alpha) . $
 
